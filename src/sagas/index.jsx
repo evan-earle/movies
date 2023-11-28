@@ -9,8 +9,13 @@ import {
 import { fetchedSearchMovies, searchMovies } from "../redux/search";
 import { API_KEY } from "../config";
 import TheMovieDbApi from "../lib/api";
+import { fetchedGenres, getGenres } from "../redux/genres";
 
 const api = new TheMovieDbApi(API_KEY);
+
+function* fetchGenres() {
+  yield put(fetchedGenres(yield call(api.getGenres)));
+}
 
 function* fetchSearchMovies(action) {
   yield delay(500);
@@ -19,5 +24,8 @@ function* fetchSearchMovies(action) {
 }
 
 export default function* watcherSaga() {
-  yield all([yield takeLatest(searchMovies.type, fetchSearchMovies)]);
+  yield all([
+    yield takeEvery(getGenres.type, fetchGenres),
+    yield takeLatest(searchMovies.type, fetchSearchMovies),
+  ]);
 }
