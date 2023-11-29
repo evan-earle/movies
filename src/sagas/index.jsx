@@ -6,7 +6,7 @@ import {
   takeEvery,
   takeLatest,
 } from "redux-saga/effects";
-import { fetchedSearchMovies } from "../redux/search";
+import { fetchedSearchMovies, searchMovies } from "../redux/search";
 import { API_KEY } from "../config";
 import TheMovieDbApi from "../lib/api";
 
@@ -19,5 +19,5 @@ function* fetchSearchMovies(action) {
 }
 
 export default function* watcherSaga() {
-  yield all([yield takeLatest()]);
+  yield all([yield takeLatest(searchMovies.type, fetchSearchMovies)]);
 }

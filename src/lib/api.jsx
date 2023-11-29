@@ -1,5 +1,5 @@
 export default class TheMovieDbApi {
-  apiBaseUrl = "https://api.themoviedb.org";
+  apiBaseUrl = "https://api.themoviedb.org/3";
   apiKey;
 
   constructor(apiKey) {
