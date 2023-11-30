@@ -22,7 +22,7 @@ export const moviesSlice = createSlice({
     fetchedPopularMovies: (state, action) => {
       return {
         ...state,
-        results: [...state.results, ...action.payload.resulsts],
+        results: [...state.results, ...action.payload.results],
         hasMore: action.payload.page < action.payload.total_pages,
         totalResults: action.payload.total_results,
         page: action.payload.page,
