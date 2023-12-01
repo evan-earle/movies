@@ -38,8 +38,8 @@ export const Layout = ({ children }) => {
           <Img src={logo} alt="The movie db" />
         </Link>
         <SearchMoviesSuggestions />
+        {children}
       </LayoutWrapper>
-      {children}
     </ThemeProvider>
   );
 };
