@@ -1,4 +1,11 @@
-import { TextField, Paper, MenuItem, Grid, Typography } from "@mui/material";
+import {
+  TextField,
+  Paper,
+  MenuItem,
+  Grid,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import { useDispatch } from "react-redux";
 import { searchMovies } from "../redux/search";
 import Downshift from "downshift";
@@ -6,6 +13,7 @@ import { Link } from "react-router-dom";
 import { IMAGES_PATH, COVER_PLACEHOLDER } from "../config";
 import { styled } from "@mui/system";
 import { mapGenres } from "../lib/helper";
+import { useTheme } from "@mui/material/styles";
 
 const PaperStyled = styled(Paper)({
   backgroundColor: "black",
@@ -30,6 +38,7 @@ const LinkStyled = styled(Link)({
 const TitleStyled = styled(Typography)({
   color: "white",
   paddingTop: 10,
+  whiteSpace: "normal",
 });
 
 const CaptionStyled = styled(Typography)({
@@ -37,6 +46,9 @@ const CaptionStyled = styled(Typography)({
 });
 
 export const Suggestion = ({ movies, genres }) => {
+  const theme = useTheme();
+  const matchDownMd = useMediaQuery(theme.breakpoints.down("sm"));
+
   const dispatch = useDispatch();
 
   const inputOnChange = (event) => {
@@ -45,8 +57,11 @@ export const Suggestion = ({ movies, genres }) => {
     }
     dispatch(searchMovies(event.target.value));
   };
+
+  const itemToString = () => "";
+
   return (
-    <Downshift>
+    <Downshift itemToString={itemToString}>
       {({
         getInputProps,
         getItemProps,
@@ -86,7 +101,7 @@ export const Suggestion = ({ movies, genres }) => {
                     })}
                   >
                     <LinkStyled to={`/movie/${item.id}`}>
-                      <Grid container={true} spacing={8}>
+                      <Grid container={true} spacing={matchDownMd ? 2 : 8}>
                         <Grid item={true}>
                           {item.poster_path ? (
                             <ImgStyled
@@ -101,7 +116,9 @@ export const Suggestion = ({ movies, genres }) => {
                           )}
                         </Grid>
                         <Grid item={true}>
-                          <TitleStyled variant="h4">{item.title}</TitleStyled>
+                          <TitleStyled variant={matchDownMd ? "h6" : "h4"}>
+                            {item.title}
+                          </TitleStyled>
                           <CaptionStyled variant="caption">
                             {mapGenres(item.genre_ids, genres)}
                           </CaptionStyled>
