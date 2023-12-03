@@ -8,18 +8,9 @@ export default class TheMovieDbApi {
     this.apiKey = apiKey;
   }
 
-  // getPopularMovies = async (page = 1) => {
-  //   const response = await fetch(
-  //     `${this.apiBaseUrl}/movie/popular?api_key=${this.apiKey}&page=${page}`
-  //   );
-  //   console.log(response);
-  //   return response.json();
-  // };
-
-  getPopularMovies = async () => {
+  getPopularMovies = async (page = 1) => {
     try {
-      const data = await axios.get(`/api/music`);
-      console.log(data);
+      const data = await axios.get(`/api/music/${page}`);
       return data;
     } catch (err) {
       console.log(err);
