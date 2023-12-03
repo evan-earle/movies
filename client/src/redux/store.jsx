@@ -16,7 +16,10 @@ const store = configureStore({
     movie: movieReducer,
   },
   middleware: (getDefaultMiddleware) => {
-    return getDefaultMiddleware({ think: false }).prepend(sagaMiddleware);
+    return getDefaultMiddleware({
+      serializableCheck: false,
+      think: false,
+    }).prepend(sagaMiddleware);
   },
 });
 

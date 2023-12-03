@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export default class TheMovieDbApi {
   apiBaseUrl = "https://api.themoviedb.org/3";
   apiKey;
@@ -6,12 +8,22 @@ export default class TheMovieDbApi {
     this.apiKey = apiKey;
   }
 
-  getPopularMovies = async (page = 1) => {
-    const response = await fetch(
-      `${this.apiBaseUrl}/movie/popular?api_key=${this.apiKey}&page=${page}`
-    );
+  // getPopularMovies = async (page = 1) => {
+  //   const response = await fetch(
+  //     `${this.apiBaseUrl}/movie/popular?api_key=${this.apiKey}&page=${page}`
+  //   );
+  //   console.log(response);
+  //   return response.json();
+  // };
 
-    return response.json();
+  getPopularMovies = async () => {
+    try {
+      const data = await axios.get(`/api/music`);
+      console.log(data);
+      return data;
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   searchMovies = async (query) => {

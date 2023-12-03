@@ -26,8 +26,10 @@ function* fetchSearchMovies(action) {
 }
 
 function* fetchPopularMovies(action) {
-  yield put(
-    fetchedPopularMovies(yield call(api.getPopularMovies, action.payload))
+  console.log(
+    yield put(
+      fetchedPopularMovies(yield call(api.getPopularMovies, action.payload))
+    )
   );
 }
 

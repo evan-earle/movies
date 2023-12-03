@@ -21,11 +21,18 @@ export const moviesSlice = createSlice({
     },
     fetchedPopularMovies: (state, action) => {
       return {
+        // ...state,
+        // results: [...state.results, ...action.payload.results],
+        // hasMore: action.payload.page < action.payload.total_pages,
+        // totalResults: action.payload.total_results,
+        // page: action.payload.page,
+        // totalPages: action.payload.totalPages,
+        // isFetching: false,
         ...state,
-        results: [...state.results, ...action.payload.results],
-        hasMore: action.payload.page < action.payload.total_pages,
-        totalResults: action.payload.total_results,
-        page: action.payload.page,
+        results: [...state.results, ...action.payload.data.results],
+        hasMore: action.payload.data.page < action.payload.data.total_pages,
+        totalResults: action.payload.data.total_results,
+        page: action.payload.data.page,
         totalPages: action.payload.totalPages,
         isFetching: false,
       };

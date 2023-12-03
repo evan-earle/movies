@@ -5,7 +5,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-import { IMAGES_PATH } from "../config";
+import { IMAGES_PATH, COVER_PLACEHOLDER } from "../config";
 import { mapGenres } from "../lib/helper";
 import { styled } from "@mui/system";
 import { useTheme } from "@mui/material/styles";
@@ -34,11 +34,13 @@ export const Movies = ({ movies, genres }) => {
       {movies.results.map((movie) => (
         <ImageListItemStyled key={movie.id}>
           <Link to={`/movie/${movie.id}}`}>
-            {movie.poster_path && (
+            {movie.poster_path ? (
               <ImgStyled
                 src={`${IMAGES_PATH}/w300${movie.poster_path}`}
                 alt={movie.title}
               />
+            ) : (
+              <ImgStyled src={`${COVER_PLACEHOLDER}`} alt={movie.title} />
             )}
             <ImageListItemBar
               title={movie.title}
