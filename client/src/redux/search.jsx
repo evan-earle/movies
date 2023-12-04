@@ -22,10 +22,14 @@ const searchSlice = createSlice({
       return {
         ...state,
         isFetching: false,
-        results: action.payload.results,
-        totalResults: action.payload.total_results,
-        page: action.payload.page,
-        totalPages: action.payload.total_pages,
+        // results: action.payload.results,
+        // totalResults: action.payload.total_results,
+        // page: action.payload.page,
+        // totalPages: action.payload.total_pages,
+        results: action.payload.data.results,
+        totalResults: action.payload.data.total_results,
+        page: action.payload.data.page,
+        totalPages: action.payload.data.total_pages,
       };
     },
     resetState: (state) => {

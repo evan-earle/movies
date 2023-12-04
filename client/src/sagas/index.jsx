@@ -8,12 +8,11 @@ import {
 } from "redux-saga/effects";
 import { fetchedSearchMovies, searchMovies } from "../redux/search";
 import { getPopularMovies, fetchedPopularMovies } from "../redux/movies";
-import { API_KEY } from "../config";
 import TheMovieDbApi from "../lib/api";
 import { fetchedGenres, getGenres } from "../redux/genres";
 import { getMovie, fetchedMovie } from "../redux/movie";
 
-const api = new TheMovieDbApi(API_KEY);
+const api = new TheMovieDbApi();
 
 function* fetchGenres() {
   yield put(fetchedGenres(yield call(api.getGenres)));

@@ -24,10 +24,10 @@ const movieSlice = createSlice({
     fetchedMovie: (state, action) => {
       return {
         ...state,
-        ...action.payload,
+        ...action.payload.data,
         recommendations: {
-          ...action.payload.recommendations,
-          results: action.payload.recommendations.results.slice(0, 10),
+          ...action.payload.data.recommendations,
+          results: action.payload.data.recommendations.results.slice(0, 10),
         },
         isFetching: false,
       };

@@ -1,16 +1,9 @@
 import axios from "axios";
 
 export default class TheMovieDbApi {
-  apiBaseUrl = "https://api.themoviedb.org/3";
-  apiKey;
-
-  constructor(apiKey) {
-    this.apiKey = apiKey;
-  }
-
   getPopularMovies = async (page = 1) => {
     try {
-      const data = await axios.get(`/api/music/${page}`);
+      const data = await axios.get(`/api/popularMusic/${page}`);
       return data;
     } catch (err) {
       console.log(err);
@@ -18,26 +11,29 @@ export default class TheMovieDbApi {
   };
 
   searchMovies = async (query) => {
-    const response = await fetch(
-      `${this.apiBaseUrl}/search/movie?api_key=${this.apiKey}&query=${query}`
-    );
-
-    return response.json();
+    try {
+      const data = await axios.get(`/api/searchMusic/${query}`);
+      return data;
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   getMovie = async (id) => {
-    const response = await fetch(
-      `${this.apiBaseUrl}/movie/${id}?api_key=${this.apiKey}&append_to_response=recommendations`
-    );
-
-    return response.json();
+    try {
+      const data = await axios.get(`/api/movie/${id}`);
+      return data;
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   getGenres = async () => {
-    const response = await fetch(
-      `${this.apiBaseUrl}/genre/movie/list?api_key=${this.apiKey}`
-    );
-
-    return response.json();
+    try {
+      const data = await axios.get(`/api/genre/`);
+      return data;
+    } catch (err) {
+      console.log(err);
+    }
   };
 }

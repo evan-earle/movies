@@ -18,7 +18,7 @@ const genresSlice = createSlice({
     fetchedGenres: (state, action) => {
       return {
         ...state,
-        genres: action.payload.genres,
+        genres: action.payload.data.genres,
         isFetching: false,
       };
     },
